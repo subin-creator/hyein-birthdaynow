@@ -346,31 +346,93 @@
     </section>
   </main>
 
-  <script>
-    const form = document.getElementById("guestForm");
-    const entries = document.getElementById("entries");
+  
+<script>
+  const SUPABASE_URL = "https://fmyybjpfrkenajjjupmo.supabase.co";
+  const SUPABASE_KEY = "sb_publishable_EAQa1AiGEbnG4iydCSxuMQ_TLEpCmGR";
 
-    form.addEventListener("submit", function (event) {
-      event.preventDefault();
+  const API_URL = SUPABASE_URL + "/rest/v1/guestbook_entries";
+  const form = document.getElementById("guestForm");
+  const entries = document.getElementById("entries");
 
-      const name = document.getElementById("guestName").value.trim();
-      const message = document.getElementById("guestMessage").value.trim();
+  function showEntry(item) {
+    const entry = document.createElement("div");
+    entry.className = "entry";
 
-      if (!name || !message) return;
+    const author = document.createElement("strong");
+    author.textContent = "♡ " + item.name + " ♡";
 
-      const entry = document.createElement("div");
-      entry.className = "entry";
+    const content = document.createElement("div");
+    content.textContent = item.message;
 
-      const author = document.createElement("strong");
-      author.textContent = "♡ " + name + " ♡";
+    entry.append(author, content);
+    entries.appendChild(entry);
+  }
 
-      const content = document.createElement("div");
-      content.textContent = message;
+  async function loadEntries() {
+    entries.replaceChildren();
 
-      entry.append(author, content);
-      entries.prepend(entry);
+    try {
+      const response = await fetch(
+        API_URL + "?select=name,message,created_at&order=created_at.desc",
+        {
+          headers: {
+            "apikey": SUPABASE_KEY,
+            "Authorization": "Bearer " + SUPABASE_KEY
+          }
+        }
+      );
+
+      if (!response.ok) throw new Error("불러오기 실패");
+
+      const data = await response.json();
+      data.forEach(showEntry);
+    } catch (error) {
+      entries.textContent = "방명록을 불러오지 못했어. 잠시 후 다시 확인해 줘.";
+      console.error(error);
+    }
+  }
+
+  form.addEventListener("submit", async function (event) {
+    event.preventDefault();
+
+    const name = document.getElementById("guestName").value.trim();
+    const message = document.getElementById("guestMessage").value.trim();
+
+    if (!name || !message) return;
+
+    const submitButton = form.querySelector('button[type="submit"]');
+    submitButton.disabled = true;
+
+    try {
+      const response = await fetch(API_URL, {
+        method: "POST",
+        headers: {
+          "apikey": SUPABASE_KEY,
+          "Authorization": "Bearer " + SUPABASE_KEY,
+          "Content-Type": "application/json",
+          "Prefer": "return=representation"
+        },
+        body: JSON.stringify({ name, message })
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error(errorText);
+        throw new Error("저장 실패");
+      }
+
       form.reset();
-    });
-  </script>
+      await loadEntries();
+    } catch (error) {
+      alert("글을 저장하지 못했어. 잠시 후 다시 시도해 줘!");
+    } finally {
+      submitButton.disabled = false;
+    }
+  });
+
+  loadEntries();
+</script>
+
 </body>
 </html>
