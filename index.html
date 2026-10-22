@@ -4,455 +4,373 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>혜인 언니 생일 축하해 ♡</title>
-
+  <title>언니 생일 축하해 ♡</title>
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
-      padding: 30px 16px 60px;
-      background: #fffefa;
-      color: #f078a7;
+      background: #fff;
+      color: #ff5797;
       font-family: "Comic Sans MS", "Malgun Gothic", cursive, sans-serif;
-      text-align: center;
+      min-height: 100vh;
     }
 
     main {
-      max-width: 600px;
+      width: min(760px, 100%);
       margin: 0 auto;
-    }
-
-    h1 {
-      font-size: clamp(27px, 7vw, 42px);
-      line-height: 1.5;
-      transform: rotate(-2deg);
-      margin: 28px 0 12px;
-    }
-
-    p {
-      line-height: 1.8;
-    }
-
-    .subtitle {
-      font-size: 14px;
-      color: #c98aa3;
+      padding: 45px 22px 60px;
+      text-align: center;
     }
 
     .doodle {
-      font-size: 23px;
-      letter-spacing: 8px;
-      margin: 18px;
+      font-size: 19px;
+      letter-spacing: 5px;
+      transform: rotate(-5deg);
+      margin-bottom: 12px;
     }
 
-    /* 춤추는 허접 고양이 */
-    .cat {
+    .scene {
       position: relative;
-      width: 130px;
-      height: 125px;
-      margin: 35px auto 15px;
-      animation: dance 0.55s infinite alternate ease-in-out;
+      min-height: 300px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
-    .cat-head {
+    /* 임시 키티 캐릭터: 나중에 실제 이미지로 교체 가능 */
+    .kitty {
+      position: relative;
+      width: 145px;
+      height: 220px;
+      animation: sillyDance .65s infinite ease-in-out;
+      transform-origin: 50% 85%;
+    }
+
+    .head {
       position: absolute;
-      width: 92px;
-      height: 72px;
-      background: white;
-      border: 2px solid #555;
-      border-radius: 42% 42% 45% 45%;
-      top: 28px;
-      left: 19px;
+      top: 5px;
+      left: 18px;
+      width: 110px;
+      height: 92px;
+      background: #fff;
+      border: 2px solid #ddd;
+      border-radius: 48% 48% 43% 43%;
+      box-shadow: inset -7px -7px 0 #eee;
+      z-index: 2;
     }
 
     .ear {
       position: absolute;
-      top: 12px;
-      width: 32px;
-      height: 40px;
+      top: -10px;
+      width: 35px;
+      height: 38px;
       background: white;
-      border: 2px solid #555;
-      transform: rotate(-25deg);
-      clip-path: polygon(0 100%, 15% 0, 100% 75%);
+      border: 2px solid #ddd;
+      transform: rotate(25deg);
+      border-radius: 5px 20px 0 0;
     }
 
-    .ear.left {
-      left: 20px;
-    }
-
-    .ear.right {
-      right: 17px;
-      transform: rotate(25deg) scaleX(-1);
-    }
+    .ear.left { left: 4px; }
+    .ear.right { right: 4px; transform: rotate(-25deg); }
 
     .eye {
       position: absolute;
-      top: 54px;
-      width: 5px;
-      height: 9px;
-      background: #555;
+      top: 39px;
+      width: 7px;
+      height: 11px;
       border-radius: 50%;
+      background: #292329;
     }
 
-    .eye.left {
-      left: 43px;
-    }
-
-    .eye.right {
-      right: 43px;
-    }
+    .eye.left { left: 28px; }
+    .eye.right { right: 28px; }
 
     .nose {
       position: absolute;
-      top: 67px;
-      left: 62px;
-      width: 7px;
-      height: 5px;
-      background: #f5a1bc;
+      top: 53px;
+      left: 49px;
+      width: 12px;
+      height: 9px;
       border-radius: 50%;
+      background: #ffcf42;
+      border: 1px solid #d6a52b;
     }
 
     .whiskers {
       position: absolute;
-      top: 69px;
-      font-size: 16px;
-      color: #555;
-      letter-spacing: -5px;
+      top: 48px;
+      width: 28px;
+      height: 2px;
+      background: #292329;
     }
 
-    .whiskers.left {
-      left: 8px;
-      transform: rotate(8deg);
-    }
-
-    .whiskers.right {
-      right: 10px;
-      transform: rotate(-8deg);
-    }
+    .whiskers.left { left: -18px; transform: rotate(-12deg); }
+    .whiskers.right { right: -18px; transform: rotate(12deg); }
 
     .bow {
       position: absolute;
-      top: 26px;
-      right: 12px;
-      color: #ff76a8;
-      font-size: 35px;
+      z-index: 4;
+      top: 0;
+      left: 56px;
+      width: 38px;
+      height: 24px;
+      background: #ff5a9b;
+      border-radius: 65% 25% 65% 25%;
       transform: rotate(20deg);
-      z-index: 2;
+      box-shadow: 13px 5px 0 -1px #ff5a9b;
     }
 
-    .cat-body {
+    .bow::after {
+      content: "";
       position: absolute;
-      top: 91px;
-      left: 39px;
-      width: 52px;
-      height: 29px;
-      border: 2px solid #555;
-      border-radius: 40% 40% 20% 20%;
-      background: white;
+      width: 12px;
+      height: 12px;
+      background: #f63e88;
+      border-radius: 50%;
+      top: 7px;
+      left: 16px;
+    }
+
+    .body-dress {
+      position: absolute;
+      top: 88px;
+      left: 34px;
+      width: 80px;
+      height: 80px;
+      background: #ff75ae;
+      border: 2px solid #e95a94;
+      border-radius: 14px 14px 8px 8px;
+      transform: rotate(-3deg);
     }
 
     .arm {
       position: absolute;
-      top: 93px;
-      width: 29px;
-      height: 5px;
-      background: #555;
-      border-radius: 10px;
+      top: 100px;
+      width: 22px;
+      height: 57px;
+      background: white;
+      border: 2px solid #ddd;
+      border-radius: 15px;
+      z-index: -1;
     }
 
-    .arm.left {
-      left: 15px;
-      transform: rotate(-40deg);
+    .arm.left { left: 20px; transform: rotate(30deg); }
+    .arm.right { right: 14px; transform: rotate(-35deg); }
+
+    .leg {
+      position: absolute;
+      top: 158px;
+      width: 31px;
+      height: 57px;
+      background: white;
+      border: 2px solid #ddd;
+      border-radius: 12px;
     }
 
-    .arm.right {
-      right: 13px;
-      transform: rotate(40deg);
+    .leg.left { left: 39px; transform: rotate(7deg); }
+    .leg.right { right: 34px; transform: rotate(-17deg); }
+
+    @keyframes sillyDance {
+      0%, 100% { transform: rotate(-12deg) translateY(0); }
+      25% { transform: rotate(14deg) translateY(-10px); }
+      50% { transform: rotate(-17deg) translateY(2px); }
+      75% { transform: rotate(18deg) translateY(-7px); }
     }
 
-    @keyframes dance {
-      from { transform: rotate(-10deg) translateY(0); }
-      to { transform: rotate(10deg) translateY(-9px); }
+    .scribble {
+      position: absolute;
+      font-size: clamp(25px, 5vw, 42px);
+      font-weight: bold;
+      font-family: "Comic Sans MS", "Malgun Gothic", cursive;
+      line-height: 1.5;
     }
 
-    .section {
-      margin: 45px auto;
-      padding: 22px 16px;
-      border: 2px dashed #f7bfd2;
-      border-radius: 18px;
+    .left-note {
+      left: 2%;
+      top: 50px;
+      transform: rotate(-12deg);
+    }
+
+    .right-note {
+      right: 0;
+      top: 65px;
+      transform: rotate(8deg);
+    }
+
+    .dance-note {
+      margin: 5px 0 70px;
+      font-size: 15px;
+      transform: rotate(-3deg);
+    }
+
+    .hearts {
+      font-size: 22px;
+      letter-spacing: 15px;
+      margin: 12px 0;
+    }
+
+    .guestbook {
+      width: min(430px, 100%);
+      margin: 0 auto;
+      text-align: left;
+      padding: 15px;
+      border: 1px dashed #ff83b5;
       transform: rotate(-0.5deg);
     }
 
-    .section h2 {
-      font-size: 23px;
+    .guestbook h2 {
+      text-align: center;
+      font-size: 24px;
       font-weight: normal;
-    }
-
-    button {
-      font: inherit;
-      color: #e96e9c;
-      background: #fff;
-      border: 1.5px solid #f3a7c2;
-      border-radius: 12px;
-      padding: 10px 16px;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background: #fff2f7;
       transform: rotate(-2deg);
+      margin: 0 0 18px;
     }
 
-    button:active {
-      transform: scale(0.96);
-    }
-
-    #open-gift {
-      border: none;
-      padding: 8px;
-    }
-
-    #gift-image {
+    label {
       display: block;
-      width: 180px;
-      max-width: 65vw;
-      height: auto;
-      margin: 0 auto 8px;
-    }
-
-    #cake {
-      font-size: 78px;
-      margin: 15px 0;
-    }
-
-    .candle {
-      font-size: 35px;
-      padding: 5px 9px;
-      margin: 3px;
-      border: none;
-    }
-
-    #birthday-letter {
-      margin-top: 24px;
-      padding: 18px;
-      border: 2px dashed #f4a9c5;
-      background: #fff8fb;
-      border-radius: 10px;
-      transform: rotate(1deg);
-      color: #d96791;
-    }
-
-    #birthday-letter h3 {
-      font-size: 25px;
+      font-size: 14px;
+      margin: 12px 0 5px;
     }
 
     input, textarea {
       display: block;
       width: 100%;
-      margin: 10px 0;
-      padding: 12px;
-      border: 1px solid #f4bfd2;
-      border-radius: 10px;
+      border: 1px solid #ff9ac2;
+      background: #fff;
+      color: #a84c75;
+      padding: 10px;
       font: inherit;
-      background: white;
-      color: #555;
+      outline-color: #ff5797;
+      border-radius: 0;
     }
 
     textarea {
+      height: 80px;
       resize: vertical;
-      min-height: 75px;
     }
 
-    .guest-entry {
-      text-align: left;
-      background: #fff7fa;
-      border-radius: 10px;
-      padding: 10px 14px;
-      margin-top: 10px;
+    button {
+      display: block;
+      margin: 12px auto 0;
+      padding: 7px 28px;
+      color: #ed4c91;
+      background: white;
+      border: 1px solid #ff78ad;
+      font: inherit;
+      cursor: pointer;
+      transform: rotate(2deg);
+    }
+
+    button:hover {
+      background: #fff0f6;
+      transform: rotate(-2deg) scale(1.05);
+    }
+
+    .entries {
+      margin-top: 20px;
+    }
+
+    .entry {
+      border-top: 1px dashed #ffb1ce;
+      padding: 12px 4px;
       overflow-wrap: anywhere;
+      font-size: 14px;
     }
 
-    footer {
-      margin-top: 45px;
-      font-size: 13px;
-      color: #d7a0b4;
+    .entry strong {
+      display: block;
+      margin-bottom: 5px;
     }
 
-    [hidden] {
-      display: none !important;
+    @media (max-width: 480px) {
+      main { padding: 30px 14px 45px; }
+      .scene { min-height: 275px; }
+      .kitty { transform: scale(.9); }
+      .left-note { left: 0; top: 25px; }
+      .right-note { right: 0; top: 50px; }
+      .dance-note { margin-bottom: 50px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .kitty { animation-duration: 2s; }
     }
   </style>
 </head>
-
 <body>
-<main>
+  <main>
+    <div class="doodle">♡　⋆｡°✩　♡　✩°｡⋆　♡</div>
 
-  <div class="doodle">♡ ✿ ♡ ✿ ♡</div>
+    <section class="scene" aria-label="춤추는 키티">
+      <div class="scribble left-note">언니 ♡</div>
 
-  <h1>언니 생일 축하해 ♡</h1>
-  <p class="subtitle">세상에서 제일 하찮고 소중한 생일 홈페이지</p>
-
-  <div class="cat" aria-label="춤추는 고양이">
-    <div class="ear left"></div>
-    <div class="ear right"></div>
-    <div class="cat-head"></div>
-    <div class="eye left"></div>
-    <div class="eye right"></div>
-    <div class="nose"></div>
-    <div class="whiskers left">〰</div>
-    <div class="whiskers right">〰</div>
-    <div class="bow">🎀</div>
-    <div class="cat-body"></div>
-    <div class="arm left"></div>
-    <div class="arm right"></div>
-  </div>
-
-  <p>오늘의 주인공 등장 ㅋㅋㅋ</p>
-  <p>오늘은 언니가 태어난 날임 🎉</p>
-
-  <div class="doodle">૮₍ ˶ᵔ ᵕ ᵔ˶ ₎ა</div>
-
-  <section class="section" id="birthday-game">
-    <h2>♡ 언니의 깜짝 선물 ♡</h2>
-    <p>선물 상자를 눌러 보셈</p>
-
-    <button id="open-gift" type="button">
-      <img
-        id="gift-image"
-        src="gift-box.png"
-        alt="삐뚤빼뚤 손그림 선물 상자"
-      >
-      열어 보기 🎁
-    </button>
-
-    <div id="cake-area" hidden>
-      <p>짜잔 케이크임 ♡</p>
-      <div id="cake" aria-label="생일 케이크">🎂</div>
-      <p>촛불 세 개를 하나씩 눌러서 꺼 봐!</p>
-
-      <div id="candles">
-        <button class="candle" type="button" aria-label="첫 번째 촛불 끄기">🕯️</button>
-        <button class="candle" type="button" aria-label="두 번째 촛불 끄기">🕯️</button>
-        <button class="candle" type="button" aria-label="세 번째 촛불 끄기">🕯️</button>
+      <div class="kitty" role="img" aria-label="분홍 리본을 한 춤추는 고양이">
+        <div class="bow"></div>
+        <div class="head">
+          <div class="ear left"></div>
+          <div class="ear right"></div>
+          <div class="eye left"></div>
+          <div class="eye right"></div>
+          <div class="nose"></div>
+          <div class="whiskers left"></div>
+          <div class="whiskers right"></div>
+        </div>
+        <div class="arm left"></div>
+        <div class="arm right"></div>
+        <div class="body-dress"></div>
+        <div class="leg left"></div>
+        <div class="leg right"></div>
       </div>
 
-      <p id="candle-hint">소원 빌 준비 됐나 ㅋㅋ</p>
-    </div>
+      <div class="scribble right-note">생일<br>축하해♡</div>
+    </section>
 
-    <div id="birthday-letter" hidden>
-      <h3>💌 언니에게</h3>
-      <p>언니 생일 진심으로 축하해 ♡</p>
-      <p>태어나 줘서 고맙고<br>
-      오늘 하루 세상에서 제일 행복하길!</p>
-      <p>앞으로도 맛있는 거 많이 먹고<br>
-      하고 싶은 거 다 하면서 재밌게 살자 ㅋㅋ</p>
-      <p>늘 건강하고 행복하길 ♡</p>
-      <p>— 동생이 씀 —</p>
-    </div>
-  </section>
+    <div class="dance-note">(키티가 계속 춤추는 중...)</div>
+    <div class="hearts">♡　♡　♡</div>
 
-  <section class="section">
-    <h2>♡ 생일 축하 방명록 ♡</h2>
-    <p>언니에게 한마디 남겨 주셈</p>
+    <section class="guestbook">
+      <h2>♡ 방명록 ♡</h2>
 
-    <form id="guestbook-form">
-      <input
-        id="guest-name"
-        type="text"
-        placeholder="이름"
-        maxlength="30"
-        required
-      >
+      <form id="guestForm">
+        <label for="guestName">이름 :</label>
+        <input id="guestName" maxlength="30" placeholder="이름..." required>
 
-      <textarea
-        id="guest-message"
-        placeholder="생일 축하 메시지..."
-        maxlength="300"
-        required
-      ></textarea>
+        <label for="guestMessage">내용 :</label>
+        <textarea id="guestMessage" maxlength="300"
+          placeholder="축하 한마디..." required></textarea>
 
-      <button type="submit">방명록 남기기 ♡</button>
-    </form>
+        <button type="submit">쓰기 ♡</button>
+      </form>
 
-    <div id="guestbook-entries"></div>
-    <p class="subtitle">※ 방명록은 이 페이지를 새로고침하면 사라져요!</p>
-  </section>
+      <div id="entries" class="entries" aria-live="polite"></div>
+    </section>
+  </main>
 
-  <div class="doodle">♡ ♡ ♡</div>
-  <p>혜인 언니 오늘 하루 주인공 해라 💗</p>
+  <script>
+    const form = document.getElementById("guestForm");
+    const entries = document.getElementById("entries");
 
-  <footer>
-    made with love by 동생 ♡
-  </footer>
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
 
-</main>
+      const name = document.getElementById("guestName").value.trim();
+      const message = document.getElementById("guestMessage").value.trim();
 
-<script>
-  // 선물 상자를 누르면 케이크 등장
-  const openGift = document.getElementById("open-gift");
-  const cakeArea = document.getElementById("cake-area");
-  const letter = document.getElementById("birthday-letter");
-  const candleButtons = document.querySelectorAll(".candle");
-  const hint = document.getElementById("candle-hint");
+      if (!name || !message) return;
 
-  openGift.addEventListener("click", () => {
-    openGift.hidden = true;
-    cakeArea.hidden = false;
-  });
+      const entry = document.createElement("div");
+      entry.className = "entry";
 
-  // 촛불을 모두 끄면 생일 편지 공개
-  candleButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      if (button.dataset.off === "yes") return;
+      const author = document.createElement("strong");
+      author.textContent = "♡ " + name + " ♡";
 
-      button.dataset.off = "yes";
-      button.textContent = "💨";
-      button.setAttribute("aria-label", "꺼진 촛불");
+      const content = document.createElement("div");
+      content.textContent = message;
 
-      const remaining = [...candleButtons].filter(
-        candle => candle.dataset.off !== "yes"
-      ).length;
-
-      if (remaining === 0) {
-        hint.textContent = "소원 빌었어?! 생일 축하해 🎉";
-        letter.hidden = false;
-        letter.scrollIntoView({ behavior: "smooth", block: "center" });
-      } else {
-        hint.textContent = `이제 ${remaining}개 남음 ㅋㅋ`;
-      }
+      entry.append(author, content);
+      entries.prepend(entry);
+      form.reset();
     });
-  });
-
-  // 방명록에 메시지 추가
-  const guestbookForm = document.getElementById("guestbook-form");
-  const guestbookEntries = document.getElementById("guestbook-entries");
-
-  guestbookForm.addEventListener("submit", (event) => {
-    event.preventDefault();
-
-    const name = document.getElementById("guest-name").value.trim();
-    const message = document.getElementById("guest-message").value.trim();
-
-    if (!name || !message) return;
-
-    const entry = document.createElement("div");
-    entry.className = "guest-entry";
-
-    const nameElement = document.createElement("strong");
-    nameElement.textContent = `♡ ${name} ♡`;
-
-    const messageElement = document.createElement("p");
-    messageElement.textContent = message;
-
-    entry.appendChild(nameElement);
-    entry.appendChild(messageElement);
-    guestbookEntries.prepend(entry);
-
-    guestbookForm.reset();
-  });
-</script>
-
+  </script>
 </body>
 </html>
