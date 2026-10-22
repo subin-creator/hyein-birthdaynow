@@ -1,0 +1,376 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>언니 생일 축하해 ♡</title>
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: #fff;
+      color: #ff5797;
+      font-family: "Comic Sans MS", "Malgun Gothic", cursive, sans-serif;
+      min-height: 100vh;
+    }
+
+    main {
+      width: min(760px, 100%);
+      margin: 0 auto;
+      padding: 45px 22px 60px;
+      text-align: center;
+    }
+
+    .doodle {
+      font-size: 19px;
+      letter-spacing: 5px;
+      transform: rotate(-5deg);
+      margin-bottom: 12px;
+    }
+
+    .scene {
+      position: relative;
+      min-height: 300px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* 임시 키티 캐릭터: 나중에 실제 이미지로 교체 가능 */
+    .kitty {
+      position: relative;
+      width: 145px;
+      height: 220px;
+      animation: sillyDance .65s infinite ease-in-out;
+      transform-origin: 50% 85%;
+    }
+
+    .head {
+      position: absolute;
+      top: 5px;
+      left: 18px;
+      width: 110px;
+      height: 92px;
+      background: #fff;
+      border: 2px solid #ddd;
+      border-radius: 48% 48% 43% 43%;
+      box-shadow: inset -7px -7px 0 #eee;
+      z-index: 2;
+    }
+
+    .ear {
+      position: absolute;
+      top: -10px;
+      width: 35px;
+      height: 38px;
+      background: white;
+      border: 2px solid #ddd;
+      transform: rotate(25deg);
+      border-radius: 5px 20px 0 0;
+    }
+
+    .ear.left { left: 4px; }
+    .ear.right { right: 4px; transform: rotate(-25deg); }
+
+    .eye {
+      position: absolute;
+      top: 39px;
+      width: 7px;
+      height: 11px;
+      border-radius: 50%;
+      background: #292329;
+    }
+
+    .eye.left { left: 28px; }
+    .eye.right { right: 28px; }
+
+    .nose {
+      position: absolute;
+      top: 53px;
+      left: 49px;
+      width: 12px;
+      height: 9px;
+      border-radius: 50%;
+      background: #ffcf42;
+      border: 1px solid #d6a52b;
+    }
+
+    .whiskers {
+      position: absolute;
+      top: 48px;
+      width: 28px;
+      height: 2px;
+      background: #292329;
+    }
+
+    .whiskers.left { left: -18px; transform: rotate(-12deg); }
+    .whiskers.right { right: -18px; transform: rotate(12deg); }
+
+    .bow {
+      position: absolute;
+      z-index: 4;
+      top: 0;
+      left: 56px;
+      width: 38px;
+      height: 24px;
+      background: #ff5a9b;
+      border-radius: 65% 25% 65% 25%;
+      transform: rotate(20deg);
+      box-shadow: 13px 5px 0 -1px #ff5a9b;
+    }
+
+    .bow::after {
+      content: "";
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      background: #f63e88;
+      border-radius: 50%;
+      top: 7px;
+      left: 16px;
+    }
+
+    .body-dress {
+      position: absolute;
+      top: 88px;
+      left: 34px;
+      width: 80px;
+      height: 80px;
+      background: #ff75ae;
+      border: 2px solid #e95a94;
+      border-radius: 14px 14px 8px 8px;
+      transform: rotate(-3deg);
+    }
+
+    .arm {
+      position: absolute;
+      top: 100px;
+      width: 22px;
+      height: 57px;
+      background: white;
+      border: 2px solid #ddd;
+      border-radius: 15px;
+      z-index: -1;
+    }
+
+    .arm.left { left: 20px; transform: rotate(30deg); }
+    .arm.right { right: 14px; transform: rotate(-35deg); }
+
+    .leg {
+      position: absolute;
+      top: 158px;
+      width: 31px;
+      height: 57px;
+      background: white;
+      border: 2px solid #ddd;
+      border-radius: 12px;
+    }
+
+    .leg.left { left: 39px; transform: rotate(7deg); }
+    .leg.right { right: 34px; transform: rotate(-17deg); }
+
+    @keyframes sillyDance {
+      0%, 100% { transform: rotate(-12deg) translateY(0); }
+      25% { transform: rotate(14deg) translateY(-10px); }
+      50% { transform: rotate(-17deg) translateY(2px); }
+      75% { transform: rotate(18deg) translateY(-7px); }
+    }
+
+    .scribble {
+      position: absolute;
+      font-size: clamp(25px, 5vw, 42px);
+      font-weight: bold;
+      font-family: "Comic Sans MS", "Malgun Gothic", cursive;
+      line-height: 1.5;
+    }
+
+    .left-note {
+      left: 2%;
+      top: 50px;
+      transform: rotate(-12deg);
+    }
+
+    .right-note {
+      right: 0;
+      top: 65px;
+      transform: rotate(8deg);
+    }
+
+    .dance-note {
+      margin: 5px 0 70px;
+      font-size: 15px;
+      transform: rotate(-3deg);
+    }
+
+    .hearts {
+      font-size: 22px;
+      letter-spacing: 15px;
+      margin: 12px 0;
+    }
+
+    .guestbook {
+      width: min(430px, 100%);
+      margin: 0 auto;
+      text-align: left;
+      padding: 15px;
+      border: 1px dashed #ff83b5;
+      transform: rotate(-0.5deg);
+    }
+
+    .guestbook h2 {
+      text-align: center;
+      font-size: 24px;
+      font-weight: normal;
+      transform: rotate(-2deg);
+      margin: 0 0 18px;
+    }
+
+    label {
+      display: block;
+      font-size: 14px;
+      margin: 12px 0 5px;
+    }
+
+    input, textarea {
+      display: block;
+      width: 100%;
+      border: 1px solid #ff9ac2;
+      background: #fff;
+      color: #a84c75;
+      padding: 10px;
+      font: inherit;
+      outline-color: #ff5797;
+      border-radius: 0;
+    }
+
+    textarea {
+      height: 80px;
+      resize: vertical;
+    }
+
+    button {
+      display: block;
+      margin: 12px auto 0;
+      padding: 7px 28px;
+      color: #ed4c91;
+      background: white;
+      border: 1px solid #ff78ad;
+      font: inherit;
+      cursor: pointer;
+      transform: rotate(2deg);
+    }
+
+    button:hover {
+      background: #fff0f6;
+      transform: rotate(-2deg) scale(1.05);
+    }
+
+    .entries {
+      margin-top: 20px;
+    }
+
+    .entry {
+      border-top: 1px dashed #ffb1ce;
+      padding: 12px 4px;
+      overflow-wrap: anywhere;
+      font-size: 14px;
+    }
+
+    .entry strong {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    @media (max-width: 480px) {
+      main { padding: 30px 14px 45px; }
+      .scene { min-height: 275px; }
+      .kitty { transform: scale(.9); }
+      .left-note { left: 0; top: 25px; }
+      .right-note { right: 0; top: 50px; }
+      .dance-note { margin-bottom: 50px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .kitty { animation-duration: 2s; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="doodle">♡　⋆｡°✩　♡　✩°｡⋆　♡</div>
+
+    <section class="scene" aria-label="춤추는 키티">
+      <div class="scribble left-note">언니 ♡</div>
+
+      <div class="kitty" role="img" aria-label="분홍 리본을 한 춤추는 고양이">
+        <div class="bow"></div>
+        <div class="head">
+          <div class="ear left"></div>
+          <div class="ear right"></div>
+          <div class="eye left"></div>
+          <div class="eye right"></div>
+          <div class="nose"></div>
+          <div class="whiskers left"></div>
+          <div class="whiskers right"></div>
+        </div>
+        <div class="arm left"></div>
+        <div class="arm right"></div>
+        <div class="body-dress"></div>
+        <div class="leg left"></div>
+        <div class="leg right"></div>
+      </div>
+
+      <div class="scribble right-note">생일<br>축하해♡</div>
+    </section>
+
+    <div class="dance-note">(키티가 계속 춤추는 중...)</div>
+    <div class="hearts">♡　♡　♡</div>
+
+    <section class="guestbook">
+      <h2>♡ 방명록 ♡</h2>
+
+      <form id="guestForm">
+        <label for="guestName">이름 :</label>
+        <input id="guestName" maxlength="30" placeholder="이름..." required>
+
+        <label for="guestMessage">내용 :</label>
+        <textarea id="guestMessage" maxlength="300"
+          placeholder="축하 한마디..." required></textarea>
+
+        <button type="submit">쓰기 ♡</button>
+      </form>
+
+      <div id="entries" class="entries" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <script>
+    const form = document.getElementById("guestForm");
+    const entries = document.getElementById("entries");
+
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      const name = document.getElementById("guestName").value.trim();
+      const message = document.getElementById("guestMessage").value.trim();
+
+      if (!name || !message) return;
+
+      const entry = document.createElement("div");
+      entry.className = "entry";
+
+      const author = document.createElement("strong");
+      author.textContent = "♡ " + name + " ♡";
+
+      const content = document.createElement("div");
+      content.textContent = message;
+
+      entry.append(author, content);
+      entries.prepend(entry);
+      form.reset();
+    });
+  </script>
+</body>
+</html>
