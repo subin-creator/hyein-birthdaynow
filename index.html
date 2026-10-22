@@ -372,5 +372,71 @@
       form.reset();
     });
   </script>
+
+<!-- 생일 선물 미니게임 -->
+<section id="birthday-game" style="max-width:420px;margin:45px auto;text-align:center;color:#f15b98;font-family:inherit;">
+  <p style="font-size:18px;">♡ 언니의 깜짝 선물 ♡</p>
+
+  <button id="open-gift" style="border:0;background:white;cursor:pointer;padding:10px;">
+    <img src="gift-box.png" alt="삐뚤빼뚤 손그림 선물 상자" style="width:180px;max-width:70vw;">
+    <div style="color:#f15b98;">눌러서 열어 보셈 🎁</div>
+  </button>
+
+  <div id="cake-area" hidden>
+    <p style="font-size:23px;">짜잔 케이크임 ♡</p>
+    <p>촛불을 하나씩 눌러서 꺼 봐!</p>
+    <div id="candles" style="font-size:42px;letter-spacing:8px;">
+      <button class="candle" aria-label="첫 번째 촛불 끄기" style="border:0;background:white;cursor:pointer;">🕯️</button>
+      <button class="candle" aria-label="두 번째 촛불 끄기" style="border:0;background:white;cursor:pointer;">🕯️</button>
+      <button class="candle" aria-label="세 번째 촛불 끄기" style="border:0;background:white;cursor:pointer;">🕯️</button>
+    </div>
+    <p id="candle-hint">하나씩 눌러 봐 ㅋㅋ</p>
+  </div>
+
+  <div id="birthday-letter" hidden style="margin-top:20px;padding:20px;border:1px dashed #f5a5c5;transform:rotate(-1deg);">
+    <p style="font-size:26px;">💌</p>
+    <p style="font-size:24px;">언니 생일 축하해 ♡</p>
+    <p>오늘 하루 세상에서 제일 행복하길!</p>
+    <p>태어나 줘서 고맙고 앞으로도 재밌게 살자 ㅋㅋ</p>
+    <p>♡ 동생이 ♡</p>
+  </div>
+</section>
+
+<script>
+  const openGift = document.getElementById("open-gift");
+  const cakeArea = document.getElementById("cake-area");
+  const letter = document.getElementById("birthday-letter");
+  const candleButtons = document.querySelectorAll(".candle");
+  const hint = document.getElementById("candle-hint");
+
+  openGift.addEventListener("click", () => {
+    openGift.hidden = true;
+    cakeArea.hidden = false;
+  });
+
+  candleButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      if (button.dataset.off === "yes") return;
+
+      button.dataset.off = "yes";
+      button.textContent = "💨";
+      button.setAttribute("aria-label", "꺼진 촛불");
+
+      const remaining = [...candleButtons].filter(
+        candle => candle.dataset.off !== "yes"
+      ).length;
+
+      if (remaining === 0) {
+        hint.textContent = "소원 빌었어? 🎉";
+        letter.hidden = false;
+      } else {
+        hint.textContent = `이제 ${remaining}개 남음 ㅋㅋ`;
+      }
+    });
+  });
+</script>
+</body>
+</html>
+
 </body>
 </html>
